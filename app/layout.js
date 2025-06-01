@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import  AuthContextProvider from "./context/AuthContext";
+import  CartContextProvider  from "./context/CartContext"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,8 +23,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <AuthContextProvider>
+        <CartContextProvider>
         {children}
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+      </CartContextProvider>
+      </AuthContextProvider>
       </body>
     </html>
   );

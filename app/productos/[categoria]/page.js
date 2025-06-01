@@ -1,6 +1,7 @@
-import productArray from "@/app/data/productos.json"
-import ProductCard from "@/app/components/ProductCard"
-import Link from "next/link";
+
+
+import { Suspense } from "react";
+import ProductList from "@/app/components/ProductList";
 
 export async function generateMetadata ({params, searchParams},parent){
     let {categoria} = await params;
@@ -10,27 +11,39 @@ export async function generateMetadata ({params, searchParams},parent){
     }
     
 }
+export async function  generateStaticsParams() {    
+    return[
+        {categoria:"all"},
+        {categoria:"suv"},
+        {categoria:"pick-up"}
+    ]
+}
 const Productos = async ({params}) =>{
     const {categoria} = await params;
-        const items = categoria == "all" ? productArray : productArray.filter(item => item.categoria == categoria);
     return(
-        <div className=" flex items-center content-center flex-col w-full">
-            <div className=" flex flex-row items-center justify-between w-screen mb-10 mt-10">
-                <Link href={"/"}>
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
+        <>
+        <Suspense fallback={<div class="flex items-center p-4 text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600" role="alert">
+                            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                                <span class="font-medium">Dark alert!</span> Change a few things up and try submitting again.
+                            </div>
+                            </div>}/>
+
+        <Suspense fallback={<div class="flex items-center p-4 text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600" role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
-                </Link>
-                <h2 className="text-4xl text-gray-900 dark:text-white">{categoria}</h2>
-            </div>
-        <div className=" flex flex-row flex-wrap m-auto w-screen gap-10 justify-center">
-{
-    items.map(item =>(
-        <ProductCard key={item.idx} item= {item}></ProductCard>
-    ))
-}
-        </div>
-        </div>
-    )
+                <span class="sr-only">Cargando</span>
+                <div>
+                    <span class="font-medium">Cargando</span> Estamos cargando nuestros productos ideales para vos
+                </div>
+                </div>}
+                ></Suspense>
+        <ProductList categoria={categoria}></ProductList>
+        </>
+    );
     }
 export default Productos;

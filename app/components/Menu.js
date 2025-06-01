@@ -17,6 +17,8 @@ const Menu = () =>{
     const handleClose =() =>{
         setIsOpen(false)
     }
+
+
     return(    
     <>
     
@@ -24,7 +26,7 @@ const Menu = () =>{
     <aside className="  display-flex  flex-row size-auto fixed top-0 right-0">
     <div className="max-w-screen-xl flex flex-row flex-wrap size-auto items-center justify-between mx-auto p-4 fixed top-0 right-0">
         
-        <button data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-self-end justify-center fixed top-5 right-2 p-2 w-10 h-10  text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
+        <button data-collapse-toggle="navbar-hamburger" type="button" className={`inline-flex items-center justify-self-end justify-center fixed top-5 right-2 p-2 w-10 h-10  text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600`} aria-controls="navbar-hamburger" aria-expanded="false" >
         <span className="sr-only">Open main menu</span>
         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
